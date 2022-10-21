@@ -24,11 +24,7 @@ const UserSchema = new Schema(
       validate: [validateEmail, "Please enter a valid email"],
       max_length: 50,
     },
-    github: {
-      type: String,
-      required: true,
-      max_length: 50,
-    },
+    
     thoughts: [
       {
         type: Schema.Types.ObjectId,
@@ -46,6 +42,7 @@ const UserSchema = new Schema(
     toJSON: {
       virtuals: true,
     },
+    id: false,
   }
 );
 

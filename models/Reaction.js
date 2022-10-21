@@ -1,40 +1,37 @@
 const { Schema, model } = require('mongoose');
 
 // Schema to create a course model
-const courseSchema = new Schema(
+const ReactionSchema = new Schema(
   {
-    courseName: {
+    reactionId: {
+      type: mongoose.Types.ObjectId, //Use Mongoose's ObjectId data type
+      required: true,
+      default: new mongoose.Types.ObjectId, //Default value is set to a new ObjectId
+    },
+    reactionBody: {
       type: String,
       required: true,
+      max_length: 280,
     },
-    inPerson: {
-      type: Boolean,
-      default: true,
+    username: {
+      type: String,
+      unique: true,
+      required: [true, "Please enter your username"]
     },
-    startDate: {
+    createdAt: {
       type: Date,
-      default: Date.now(),
-    },
-    endDate: {
-      type: Date,
-      // Sets a default value of 12 weeks from now
-      default: () => new Date(+new Date() + 84 * 24 * 60 * 60 * 1000),
-    },
-    students: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: 'Student',
-      },
-    ],
+      default: Date.now, //Use a getter method to format the timestamp on query?
+    }
+    
   },
   {
     toJSON: {
       virtuals: true,
     },
-    id: false,
   }
 );
 
-const Course = model('course', courseSchema);
 
-module.exports = Course;
+//?This will not be a model, but rather will be used as the reaction field's subdocument schema in the Thought model.
+
+module.exports = ReactionSchema;

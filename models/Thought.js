@@ -1,27 +1,23 @@
-const { Schema, Types } = require('mongoose');
+const { Schema, model } = require('mongoose');
+// const reaction = require('./Reaction');
 
-const assignmentSchema = new Schema(
+const ThoughtSchema = new Schema(
   {
-    assignmentId: {
-      type: Schema.Types.ObjectId,
-      default: () => new Types.ObjectId(),
-    },
-    assignmentName: {
+    thoughtText: {
       type: String,
       required: true,
-      maxlength: 50,
-      minlength: 4,
-      default: 'Unnamed assignment',
+      maxlength: 280,
+      minlength: 1,
     },
-    score: {
-      type: Number,
+    username: {
+      type: String,
       required: true,
-      default: () => Math.floor(Math.random() * (100 - 70 + 1) + 70),
     },
+    reactions: [reactionSchema], //Array of nested documents created with the reactionSchema
     createdAt: {
       type: Date,
-      default: Date.now,
-    },
+      default: Date.now, //Use a getter method to format the timestamp on query?
+    }
   },
   {
     toJSON: {
@@ -30,5 +26,11 @@ const assignmentSchema = new Schema(
     id: false,
   }
 );
+//Create a virtual called reactionCount that retrieves the length of the thought's reactions array field on query.
+ThoughtSchema.virtual("reactionCount").get(function(){
+  return this.reactions.length;
+});
 
-module.exports = assignmentSchema;
+const Thought = model('thought', ThoughtSchema);
+
+module.exports = Thought;

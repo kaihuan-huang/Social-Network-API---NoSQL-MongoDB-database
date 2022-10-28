@@ -4,9 +4,9 @@ const { Schema, model } = require('mongoose');
 const ReactionSchema = new Schema(
   {
     reactionId: {
-      type: mongoose.Types.ObjectId, //Use Mongoose's ObjectId data type
+      type: Schema.Types.ObjectId, //Use Mongoose's ObjectId data type
       required: true,
-      default: new mongoose.Types.ObjectId, //Default value is set to a new ObjectId
+      default: new Schema.Types.ObjectId, //Default value is set to a new ObjectId
     },
     reactionBody: {
       type: String,
@@ -30,8 +30,6 @@ const ReactionSchema = new Schema(
     },
   }
 );
-
-
 //?This will not be a model, but rather will be used as the reaction field's subdocument schema in the Thought model.
 
 module.exports = ReactionSchema;

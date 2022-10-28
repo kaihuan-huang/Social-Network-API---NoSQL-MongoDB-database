@@ -24,7 +24,6 @@ const UserSchema = new Schema(
       validate: [validateEmail, "Please enter a valid email"],
       max_length: 50,
     },
-    
     thoughts: [
       {
         type: Schema.Types.ObjectId,

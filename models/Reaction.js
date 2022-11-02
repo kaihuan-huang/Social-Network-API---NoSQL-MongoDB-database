@@ -1,5 +1,5 @@
-const { Schema, model } = require('mongoose');
-
+const { Schema, model, Types } = require('mongoose');
+const moment = require('moment')
 // Schema to create a react model
 const ReactionSchema = new Schema(
   {
@@ -15,18 +15,20 @@ const ReactionSchema = new Schema(
     },
     username: {
       type: String,
-      unique: true,
       required: [true, "Please enter your username"]
     },
     createdAt: {
       type: Date,
       default: Date.now, //Use a getter method to format the timestamp on query?
+      get: (createdAtVal) => moment(createdAtVal).format('MMM DD, YYYY [at] hh:mm a')
+
     }
     
   },
   {
     toJSON: {
       virtuals: true,
+      getters: true
     },
   }
 );

@@ -1,6 +1,6 @@
-const { Schema, model } = require('mongoose');
-const reactionSchema = require('./Reaction');
-
+const { Schema, model, Types } = require('mongoose');
+const ReactionSchema = require('./Reaction');
+const moment = require('moment')
 const ThoughtSchema = new Schema(
   {
     thoughtText: {
@@ -12,15 +12,17 @@ const ThoughtSchema = new Schema(
     username: {
       type: String,
       required: true,
-    },
-    reactions: [reactionSchema], //Array of nested documents created with the reactionSchema
+    },// Use ReactionsSchema to validate data
+    reactions: [ReactionSchema], //Array of nested documents created with the reactionSchema
     createdAt: {
       type: Date,
       default: Date.now, //Use a getter method to format the timestamp on query?
+      get: (createdAtVal) => moment(createdAtVal).format('MMM DD, YYYY [at] hh:mm a')
     }
   },
   {
     toJSON: {
+      virtuals: true,
       getters: true,
     },
     id: false,

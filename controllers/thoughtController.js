@@ -53,17 +53,7 @@ createThought(req, res) {
       res.status(500).json(err);
     });
 },
-  // createThought(req, res) {
-  //   Thought.create(req.body)
-  //     .then((thought) => {
-  //       console.log(thought)
-  //       res.json(thought)})
-  //     .catch((err) => {
-  //       console.log(err);
-  //       return res.status(500).json(err);
-  //     });
-  // },
-  // Delete a thought
+ 
   deleteThought(req, res) {
     Thought.findOneAndDelete({ _id: req.params.thoughtId })
       .then((thought) =>
@@ -74,6 +64,7 @@ createThought(req, res) {
       .then(() => res.json({ message: 'thoughts and users deleted!' }))
       .catch((err) => res.status(500).json(err));
   },
+
   // Update a thought
   updateThought(req, res) {
     Thought.findOneAndUpdate(
@@ -84,8 +75,42 @@ createThought(req, res) {
       .then((thought) =>
         !thought
           ? res.status(404).json({ message: 'No thought with this id!' })
-          : res.json(course)
+          : res.json(thought)
       )
       .catch((err) => res.status(500).json(err));
   },
+  // Add a reaction to a thought
+addReaction(req, res) {
+  console.log('You are adding a reacion');
+  console.log(req.body);
+  Thought.findOneAndUpdate(
+    { _id: req.params.thoughtId },
+    { $addToSet: { reactions: req.params.reactionId } },
+    { new: true }
+  )
+    .then((thought) =>
+      !thought
+        ? res
+            .status(404)
+            .json({ message: 'No thought found with that ID :(' })
+        : res.json(thought)
+    )
+    .catch((err) => res.status(500).json(err));
+},
+deleteReaction(req, res) {
+  Thought.findOneAndUpdate(
+    { _id: req.params.thoughtId },
+    {$pull: { reactions: params.reactionId}},
+    { new: true }
+  )
+    .then((thought) =>
+      !thought
+        ? res
+            .status(404)
+            .json({ message: 'No reaction found with that ID :(' })
+        : res.json(thought)
+    )
+    .catch((err) => res.status(500).json(err));
+},
+
 };

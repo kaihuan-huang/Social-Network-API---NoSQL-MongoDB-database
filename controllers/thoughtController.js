@@ -34,10 +34,10 @@ module.exports = {
   */
 createThought(req, res) {
   Thought.create(req.body)
-    .then((dbThoughtData) => {
+    .then((thought) => {
       return User.findOneAndUpdate(
-        { _id: req.body.userId },
-        { $push: { thoughts: dbThoughtData._id } },
+        { _id: req.params.userId },
+        { $push: { thoughts: thought._id } },
         { new: true }
       );
     })

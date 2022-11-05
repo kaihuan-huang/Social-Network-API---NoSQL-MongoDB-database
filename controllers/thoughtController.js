@@ -1,23 +1,43 @@
 const { Thought, User } = require('../models');
 
+// Aggregate function to get the number of friends overall
+const reactionCount = async () =>
+  Thought.aggregate()
+    .count('reactionCount')
+    .then((numberOfReactions) => numberOfReactions);
+
 module.exports = {
   // Get all thoughts
   getThoughts(req, res) {
-    Thought.find({})
-      .populate({path: 'reactions', select: '-__v'})
-      .select('-__v')
-      .then((thoughts) => res.json(thoughts))
+    Thought.find()
+      .then(async (thoughts) => {
+        const thoughtObj = {
+          thoughts,
+          reacionCount: await reactionCount,
+        };
+        return res.json(thoughtObj);
+      })
       .catch((err) => {
         console.log(err);
-        res.status(500).json(err)
+        return res.status(500).json(err);
       });
   },
+  // getThoughts(req, res) {
+  //   Thought.find({})
+  //     .populate({path: 'reactions', select: '-__v'})
+  //     .select('-__v')
+  //     .then((thoughts) => res.json(thoughts))
+  //     .catch((err) => {
+  //       console.log(err);
+  //       res.status(500).json(err)
+  //     });
+  // },
   // Get a thought by id
   getSingleThought(req, res) {
     Thought.findOne({ _id: req.params.thoughtId })
-      .populate({path: 'reactions', select: '-__v'})
+      // .populate({path: 'reactions', select: '-__v'})
       .select('-__v')
-      .then((thought) =>
+      .then(async(thought) =>
         !thought
           ? res.status(404).json({ message: 'No thought with that ID' })
           : res.json(thought)

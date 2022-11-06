@@ -37,7 +37,7 @@ module.exports = {
         return res.status(500).json(err);
       });
   },
-  /* create a new user
+  /* create a new user·
   {
   "username": "lernantino",
   "email": "lernantino@gmail.com"

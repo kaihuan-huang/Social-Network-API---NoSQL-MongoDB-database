@@ -76,12 +76,22 @@ createThought(req, res) {
  
   deleteThought(req, res) {
     Thought.findOneAndDelete({ _id: req.params.thoughtId })
-      .then((thought) =>
-        !thought
-          ? res.status(404).json({ message: 'No thought with that ID' })
-          : User.deleteMany({ _id: { $in: thoughts.users } })
-      )
-      .then(() => res.json({ message: 'thoughts and users deleted!' }))
+      .then((thought) => {
+          if (!thought){
+            return res.status(404).json({ message: 'No thought with that ID' })
+
+          }
+          return User.findOneAndUpdate(
+            { thoughts: req.params.thoughtId },
+            { $pull: { thoughts: req.params.thoughtId } },
+            { new: true }
+          );
+          })
+      .then((dbUser) => {
+        if(!dbUser){
+          res.json({ message: 'thoughts have no user' })
+        }
+        res.json({ message: 'thoughts deleted' })})
       .catch((err) => res.status(500).json(err));
   },
 
@@ -105,7 +115,7 @@ addReaction(req, res) {
   console.log(req.body);
   Thought.findOneAndUpdate(
     { _id: req.params.thoughtId },
-    { $addToSet: { reactions: req.params.reactionId } },
+    { $addToSet: { reactions: req.body } },
     { new: true }
   )
     .then((thought) =>
@@ -118,10 +128,11 @@ addReaction(req, res) {
     .catch((err) => res.status(500).json(err));
 },
 deleteReaction(req, res) {
+  console.log('thought',res)
   Thought.findOneAndUpdate(
     { _id: req.params.thoughtId },
-    {$pull: { reactions: params.reactionId}},
-    { new: true }
+    { $pull: { reactions: { reactionId: req.params.reactionId } } },
+    { runValidators: true, new: true }
   )
     .then((thought) =>
       !thought
@@ -132,5 +143,4 @@ deleteReaction(req, res) {
     )
     .catch((err) => res.status(500).json(err));
 },
-
 };

@@ -11,32 +11,30 @@
 * [Questions](#questions)
 
 ## Description
-E-COMMERCE-WEB-Object-Relational Mapping (ORM) is a back end for an e-commerce site using Express.js API and Sequelize to interact with a MySQL database.
+Social-Network-API where users can share their thoughts, react to friends’ thoughts, and create a friend list. Used Express.js for routing, a MongoDB database, and the Mongoose ODM.
 
-- Deployed link: https://github.com/kaihuan-huang/E-commerce-WEB-ORM-
+- Deployed link: https://github.com/kaihuan-huang/Social-Network-API---NoSQL-MongoDB-database
 
 
 ## More details
 ```
-AS A manager at an internet retail company
-I WANT a back end for my e-commerce website that uses the latest technologies
-SO THAT my company can compete with other e-commerce companies
+AS A social media startup
+I WANT an API for my social network that uses a NoSQL database
+SO THAT my website can handle large amounts of unstructured data
 
-GIVEN a functional Express.js API
-WHEN I add my database name, MySQL username, and MySQL password to an environment variable file
-THEN I am able to connect to a database using Sequelize
-WHEN I enter schema and seed commands
-THEN a development database is created and is seeded with test data
+GIVEN a social network API
 WHEN I enter the command to invoke the application
-THEN my server is started and the Sequelize models are synced to the MySQL database
-WHEN I open API GET routes in Insomnia Core for categories, products, or tags
+THEN my server is started and the Mongoose models are synced to the MongoDB database
+WHEN I open API GET routes in Insomnia for users and thoughts
 THEN the data for each of these routes is displayed in a formatted JSON
-WHEN I test API POST, PUT, and DELETE routes in Insomnia Core
-THEN I am able to successfully create, update, and delete data in my database
+WHEN I test API POST, PUT, and DELETE routes in Insomnia
+THEN I am able to successfully create, update, and delete users and thoughts in my database
+WHEN I test API POST and DELETE routes in Insomnia
+THEN I am able to successfully create and delete reactions to thoughts and add and remove friends to a user’s friend list
 ```
 ## Assets
 
-The following images demonstrate the web application's appearance and functionality in Insomnia & Draw.io:
+The following images demonstrate the web application's appearance and functionality in Insomnia:
 
 ![insomnia](images/insomnia.png)
 ![database](images/database.png)

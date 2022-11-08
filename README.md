@@ -42,13 +42,13 @@ The following images demonstrate the web application's appearance and functional
 
 ## Installation 
 The user should clone the repository from GitHub and download Node. 
-Run `npm i ` to install.
+Run `npm install ` to install.
 Run `npm run seed ` to run the database.
-Run `npm start ` to start the Note-Taker-App.
+Run `npm start ` to start the Social-Network-API.
 
 ## Usage 
 Use inquirer from your command line to answer questions about your project.
-View walk through video here - [E-COMMERCE-WEB-ORM-](https://drive.google.com/file/d/19GhWHEByLXkuM5QmHTz7RMPCBU9wOZN9/view)<br>
+View walk through video here - [Social-Network-API](https://drive.google.com/file/d/19GhWHEByLXkuM5QmHTz7RMPCBU9wOZN9/view)<br>
 
 
 ## Contributing 
@@ -58,9 +58,9 @@ Contributors should read the installation section.
 
 ```
  Express.js API 
- Sequelize
- MySQL database
- Dotenv Package
+  Mongoose packages
+  tested in Insomnia
+  MongoDB database
 ```
 ## Questions
 If you have any questions about this projects, please contact me directly at huangkaihuan0216@gmail.com. You can view more of my projects at https://github.com/kaihuan-huang.

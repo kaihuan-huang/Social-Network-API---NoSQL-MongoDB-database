@@ -1,5 +1,5 @@
-const { ObjectId } = require('mongoose').Types;
-const { User} = require('../models');
+// const { ObjectId } = require('mongoose').Types;
+const { User, Thought} = require('../models');
 
 // Aggregate function to get the number of friends overall
 const friendCount = async () =>
@@ -50,24 +50,56 @@ module.exports = {
       .catch((err) => res.status(500).json(err));
   },
  
-  // Delete a student and remove them from the course
+  //Delete a student and remove them from the course
+  // deleteUser(req, res) {
+  //   User.findOneAndDelete({ _id: req.params.userId })
+  //     .then((user) =>
+  //       !user
+  //         ? res.status(404).json({ message: 'No such user exists' })
+  //         : Thought.deleteMany({_id: { $in: user.thoughts}})) //?
+  //     .then((thought) =>
+  //       !thought
+  //         ? res.status(404).json({
+  //             message: 'user deleted, but no thought found',
+  //           })
+  //         : res.json({ message: 'User successfully deleted' })
+  //     )
+  //     .catch((err) => {
+  //       console.log(err);
+  //       res.status(500).json(err);
+  //     });
+  // },
+  // deleteUser(req, res) {
+  //   User.findOneAndDelete({ _id: req.params.userId })
+  //   console.log('deleteUser', res)
+  //     .then((user) => {
+  //         if (!user){
+  //           return res.status(404).json({ message: 'No user with that ID' })
+
+  //         }
+  //         return User.findOneAndUpdate(
+  //           { users: req.params.userId },
+  //           { $pull: { users: req.params.userId } },
+  //           { new: true }
+  //         );
+  //         })
+  //     // .then((dbUser) => {
+  //     //   if(!dbUser){
+  //     //     res.json({ message: 'thoughts have no user' })
+  //     //   }
+  //     //   res.json({ message: 'thoughts deleted' })})
+  //     .catch((err) => res.status(500).json(err));
+  // },
+
   deleteUser(req, res) {
-    User.findOneAndRemove({ _id: req.params.userId })
+    User.findOneAndDelete({ _id: req.params.userId })
       .then((user) =>
         !user
-          ? res.status(404).json({ message: 'No such user exists' })
-          : Thought.deleteMany({_id: { $in: user.thoughts}})) //?
-      .then((thought) =>
-        !thought
-          ? res.status(404).json({
-              message: 'user deleted, but no thought found',
-            })
-          : res.json({ message: 'User successfully deleted' })
+          ? res.status(404).json({ message: 'No user with that ID' })
+          : Thought.deleteMany({ _id: { $in: user.thoughts } })
       )
-      .catch((err) => {
-        console.log(err);
-        res.status(500).json(err);
-      });
+      .then(() => res.json({ message: 'User and associated thoughts deleted!' }))
+      .catch((err) => res.status(500).json(err));
   },
 
 // Update a current User by ID

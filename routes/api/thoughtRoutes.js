@@ -22,7 +22,7 @@ router.route('/:userId').post(createThought);
 // /api/thought/:thoughtId/reactions
 router.route('/:thoughtId/reactions').post(addReaction);
 
-// //api/thoughts/:thoughtId/reactions/reactionId
+// //api/thought/:thoughtId/reactions/reactionId
 router.route('/:thoughtId/reactions/:reactionId').delete(deleteReaction);
   
 

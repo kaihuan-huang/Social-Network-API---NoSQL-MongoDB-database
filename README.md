@@ -36,8 +36,8 @@ THEN I am able to successfully create and delete reactions to thoughts and add a
 
 The following images demonstrate the web application's appearance and functionality in Insomnia:
 
-![insomnia](images/insomnia.png)
-![database](images/database.png)
+![insomnia](images/example.png)
+
 
 
 ## Installation 
@@ -48,7 +48,7 @@ Run `npm start ` to start the Social-Network-API.
 
 ## Usage 
 Use inquirer from your command line to answer questions about your project.
-View walk through video here - [Social-Network-API](https://drive.google.com/file/d/19GhWHEByLXkuM5QmHTz7RMPCBU9wOZN9/view)<br>
+View walk through video here - [Social-Network-API](https://drive.google.com/file/d/1zeQ3AUeuJwaU9InUIp6IfpriZZGwY-zE/view)<br>
 
 
 ## Contributing 

@@ -48,7 +48,7 @@ Run `npm start ` to start the Social-Network-API.
 
 ## Usage 
 Use inquirer from your command line to answer questions about your project.
-View walk through video here - [Social-Network-API](https://drive.google.com/file/d/1zeQ3AUeuJwaU9InUIp6IfpriZZGwY-zE/view)<br>
+View walk through video here - [Social-Network-API](https://drive.google.com/file/d/12znJ6sDKhQ9DofFNqYRLyCe7J4V3H7to/view)<br>
 
 
 ## Contributing 
